@@ -12,6 +12,7 @@ django-on-heroku==1.1.2
 gunicorn==20.1.0
 idna==3.3
 Pillow==9.0.1
+python-dotenv==0.19.2
 psycopg2-binary==2.9.3
 pycodestyle==2.8.0
 requests==2.27.1
