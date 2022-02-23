@@ -11,11 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
 from dotenv import load_dotenv
-
 import os
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -150,10 +147,10 @@ LOGIN_URL = 'login'
 import django_on_heroku
 django_on_heroku.settings(locals())
 
-CLOUDINARY_STORAGE = {
-  'cloud_name': "dminmqrbp", 
-  'api_key':  "247161218744313", 
-  'api_secret':  "lyrsvT1Ku4bciqOePRPiO2-aSuY",
-}
+cloudinary.config( 
+  cloud_name = "dminmqrbp", 
+  api_key = "247161218744313", 
+  api_secret = "lyrsvT1Ku4bciqOePRPiO2-aSuY" 
+)
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary.config.storage.MediaCloudinaryStorage'
