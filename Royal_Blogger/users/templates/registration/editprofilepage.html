@@ -1,0 +1,62 @@
+{% extends 'blog/home.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == user.userprofile.id %}
+<h1 style="font-family: baskerville, serif;" class="tc">Edit Profile</h1>
+{% if user.userprofile.profile_pic %}
+<a class="is-flex is-justify-content-center"><img src="{{ user.userprofile.profile_pic.url }}" class="br-100 pa1 ba b--black-10 h3 w3 image is-128x128"></a>
+{% else %}
+<img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 h3 w3 dib image is-128x128"></a>
+{% endif %}
+<br>
+<div class="field is-flex is-justify-content-center">
+    <form method="POST" enctype='multipart/form-data' class="box">
+        {% csrf_token %}
+        <div class="field">
+            {{ form.profile_pic}}
+        </div>
+        <p class="b mt2">Bio:</p>
+        <div class="field">
+            {{ form.bio}}
+        </div>
+        <p class="b mt2">Website URL:</p>
+        <div class="field">
+            {{ form.website_url }}
+        </div>
+        <p class="b mt2">Meta URL:</p>
+        <div class="field">
+            {{ form.facebook_url }}
+        </div>
+        <p class="b mt2">Instagram URL:</p>
+        <div class="field">
+            {{ form.instagram_url }}
+        </div>
+        <p class="b mt2">Twitter URL:</p>
+        <div class="field">
+            {{ form.twitter_url }}
+        </div>
+        <p class="b mt2">LinkedIn URL:</p>
+        <div class="field">
+            {{ form.linkedin_url }}
+        </div>
+        <div class="is-flex is-justify-content-center mt-2">
+            <button class="button is-primary" style="cursor: pointer;">
+                <span>Update</span>
+                <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+</form>
+    {% else %}
+
+<p class="tc">
+We're sorry, you are not allowed to view this page.
+</p>
+
+{% endif %}
+{% endif %}
+{% endblock %}

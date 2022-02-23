@@ -1,0 +1,30 @@
+{% extends 'blog/home.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+<h1 style="font-family: baskerville, serif;" class="tc">Delete Blog Post</h1>
+<h3 class="tc b">Delete: {{ post.title }}</h3>
+<br>
+<table class="is-flex is-justify-content-center">
+    <form method="POST">
+        {% csrf_token %}
+    </table>
+    <div class="is-flex is-justify-content-center">
+        <button class="button is-danger">
+            <span>Delete</span>
+            <span class="icon is-small">
+                <i class="fas fa-trash-alt"></i>
+            </span>
+        </button>
+    </div>
+</form>
+{% else %}
+
+<p class="tc">
+    We're sorry, you are not allowed to view this page.
+</p>
+
+{% endif %}
+{% endif %}
+{% endblock %}

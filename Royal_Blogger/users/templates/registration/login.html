@@ -1,0 +1,20 @@
+{% extends 'blog/home.html' %}
+
+{% block content %}
+<h1 style="font-family: baskerville, serif;" class="tc">Sign in</h1>
+<br>
+<table class="is-flex is-justify-content-center">
+<form method="post" class="control" action="/users/login/">
+    {% csrf_token %}
+    {{ form.as_table }}
+</table>
+<div class="is-flex is-justify-content-center">
+<button class="button is-primary mt-2" style="cursor: pointer;">
+    <span>Sign in</span>
+    <span class="icon is-small">
+        <i class="fas fa-sign-in-alt"></i>
+    </span>
+</button>
+</div>
+</form>
+{% endblock %}

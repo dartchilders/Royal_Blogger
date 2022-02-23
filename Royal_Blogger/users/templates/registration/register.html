@@ -1,0 +1,20 @@
+{% extends 'blog/home.html' %}
+
+{% block content %}
+<h1 style="font-family: baskerville, serif;" class="tc">Register</h1>
+<br>
+<table class="is-flex is-justify-content-center">
+<form method="POST" class="control">
+    {% csrf_token %}
+    {{ form.as_table }}
+</table>
+<div class="is-flex is-justify-content-center">
+    <button class="button is-primary mt-2" style="cursor: pointer;">
+        <span>Register</span>
+        <span class="icon is-small">
+            <i class="fas fa-sign-in-alt"></i>
+        </span>
+    </button>
+</div>
+</form>
+{% endblock %}

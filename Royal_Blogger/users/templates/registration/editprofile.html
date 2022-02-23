@@ -1,0 +1,35 @@
+{% extends 'blog/home.html' %}
+
+{% block content %}
+<h1 style="font-family: baskerville, serif;" class="tc">Edit Settings</h1>
+<br>
+<div class="field is-flex is-justify-content-center">
+    <form method="POST" enctype='multipart/form-data' class="box">
+        {% csrf_token %}
+        <p class="b">Username:</p>
+        <div class="field">
+            {{ form.username }}
+        </div>
+        <p class="b mt2">First name:</p>
+        <div class="field">
+            {{ form.first_name }}
+        </div>
+        <p class="b mt2">Last name:</p>
+        <div class="field">
+            {{ form.last_name }}
+        </div>
+        <p class="b mt2">Password:</p>
+        <div class="field">
+            {{ form.password }}
+        </div>
+        <div class="is-flex is-justify-content-center mt-2">
+            <button class="button is-primary" style="cursor: pointer;">
+                <span>Update</span>
+                <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

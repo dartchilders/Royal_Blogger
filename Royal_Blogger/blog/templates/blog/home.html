@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Blogger</title>
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
+    <script src="https://kit.fontawesome.com/9572697c4a.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1cfd1a1a79.js" crossorigin="anonymous"></script>
+
+    <style>
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 15px;
+        }
+    </style>
+</head>
+{% load static %}
+
+<body>
+    <header class="bg-white black-80 tc pv4 avenir">
+       <a href="{% url 'blog:home' %}"><img src="https://cdn0.iconfinder.com/data/icons/social-networks-and-media-flat-icons/136/Social_Media_Socialmedia_network_share_socialnetwork_network-22-512.png"
+            class="br-100 pa1 ba b--black-10 h3 w3" alt="avatar"></a>
+        <h1 class="mt2 mb0 baskerville i fw1 f1" href="/">Royal Blogger</h1>
+        <h2 class="mt2 mb0 f6 fw4 ttu tracked">Where adventures, thoughts and recipes are shared for all</h2>
+        <nav class="bt bb mw8 center mt4 pv3 flex items-center justify-center">
+            {% if user.is_authenticated %}
+            {% if user.userprofile.profile_pic %}
+            <img src="{{ user.userprofile.profile_pic.url }}" class="br-100 h3 w3 dib">
+            {% else %}
+            <img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 h3 w3 dib">
+            {% endif %}
+            <p class="f6 f5-l link bg-animate black-80 dib pa3 ph4-l b"><a href="{% url 'users:userprofilepage' user.userprofile.id %}" class="black">{{ user.username }}</a></p>
+            {% endif %}
+            <a class="f6 f5-l link dim dark-gray bg-animate black-80 dib pa3 ph4-l" href="/">Home</a>
+            <div class="navbar-item has-dropdown is-hoverable f6 f5-l link bg-animate black-80 dib pa3 ph4-l">
+                <a class="navbar-link">
+                    Categories
+                </a>
+                <div class="navbar-dropdown">
+                    {% for cat in cat_menu %}
+                    <a class="navbar-item control has-icons-right" href="#">
+                        {{ cat }}
+                    </a>
+                    {% endfor %}
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="#">Add Category</a>
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+            <a class="f6 f5-l link dim dark-gray bg-animate black-80 dib pa3 ph4-l" href="{% url 'blog:add' %}">Add
+                Post</a>
+            <div class="navbar-item has-dropdown is-hoverable f6 f5-l link bg-animate black-80 dib pa3 ph4-l">
+                <a class="navbar-link">
+                    Profile
+                </a>
+
+                <div class="navbar-dropdown">
+                    <a class="navbar-item control has-icons-right" href="{% url 'users:editprofile' %}">
+                        Settings
+                        <span class="icon is-small is-right">
+                            <i class="fa-solid fa-gear gray"></i>
+                        </span>
+                    </a>
+                    {% if user.userprofile.id %}
+                    <a class="navbar-item" href="{% url 'users:editprofilepage' user.userprofile.id %}">
+                        Edit Profile
+                    </a>
+                    {% else %}
+                    <a class="navbar-item" href="#">
+                        Create Profile
+                    </a>
+                    {% endif %}
+                    <a class="navbar-item" href="{% url 'users:userprofilepage' user.userprofile.id %}">
+                        Profile Page
+                    </a>
+                </div>
+            </div>
+            </div>
+            <a class="f6 f5-l link dim dark-gray bg-animate black-80 dib pa3 ph4-l" href="{% url 'logout' %}">Log
+                Out</a>
+            {% else %}
+            <a class="f6 f5-l link dim dark-gray bg-animate black-80 dib pa3 ph4-l"
+                href="{% url 'users:register' %}">Register</a>
+            <a class="f6 f5-l link dim dark-gray bg-animate black-80 dib pa3 ph4-l" href="{% url 'login' %}">Sign
+                in</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <section class="mw8 center avenir">
+        {% for post in object_list %}
+        <article class="bt bb b--black-10">
+            <a class="db pv4 ph3 ph0-l no-underline black dim" href="{% url 'blog:detail' post.pk %}">
+                <div class="flex flex-column flex-row-ns">
+                    <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" class="br2 db">
+                        {% elif post.video %}
+                        <video src="{{ post.video.url }}" controls class="db"></video>
+                        {% else %}
+                        <img src="{% static 'blog/images/default-image.jpeg' %}" class="db">
+                        {% endif %}
+                    </div>
+                    <div class="w-100 w-60-ns pl3-ns">
+                        <h1 class="f3 fw1 baskerville mt0 lh-title">{{ post.title }}</h1>
+                        <p class="f6 f5-l lh-copy">
+                            {{ post.body|slice:":200" }}...
+                        </p>
+                        <br>
+                        <p class="f6 lh-copy mv0">By {{ post.author }}</p>
+                        <p class="f6 lh-copy mt1">{{ post.created_on }}</p>
+                        <p class="f6 lh-copy mt2">Category: {{ post.category }}</p>
+                    </div>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </section>
+
+    {% block content %}
+    {% endblock %}
+
+    <img onclick="topFunction()" id="myBtn" class="fa-solid fa-circle-arrow-up"
+        src="https://img.icons8.com/ios-filled/50/000000/circled-up.png" />
+
+    <script>
+        var mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+    <small class="f6 db tc">© 2022 <b class="ttu">Royal Blogger Inc</b>., All Rights Reserved</small>
+    <div class="tc mt3">
+      <a href="#" title="Language" class="f6 dib ph2 link mid-gray dim">Language</a>
+      <a href="#" title="Terms" class="f6 dib ph2 link mid-gray dim">Terms of Use</a>
+      <a href="#" title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
+    </div>
+  </footer>
+</body>
+
+</html>

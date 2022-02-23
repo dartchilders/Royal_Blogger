@@ -1,0 +1,188 @@
+{% extends 'blog/home.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<article>
+    <header class="mw8 bg-gold sans-serif center tc">
+        <div class="mw9 center pa4 pt5-ns">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                    {{ post.title }}
+                </span>
+            </h3>
+            <h5 class="f6 ttu tracked black-80"><strong> By {{ post.author }}</strong> </h5>
+            <time class="f6 mb2 dib ttu tracked"><small><strong>{{ post.created_on }}</strong></small></time>
+            <br>
+            {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+            <a href="{% url 'blog:edit' post.id %}"><i class="fa-regular fa-pen-to-square ml3 black"></i></a><a href="{% url 'blog:delete' post.id %}"><i class="fa-regular fa-trash-can ml3 red"></i></a></p>
+            {% endif %}
+            {% endif %}
+        </div>
+    </header>
+    <div class="pa4 ph7-l georgia mw9-l center flex justify-center flex flex-column">
+        <p class="f5 f4-ns lh-copy measure center">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="box">
+            {% endif %}
+            <br>
+            {% if post.video %}
+            <video src="{{ post.video.url }}" controls class="box"></video>
+            {% endif %}
+            <br>
+            {{ post.body|linebreaks }}
+        </p>
+    </div>
+</article>
+
+<article class="mw6 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
+    <div class="tc">
+        {% if post.author.userprofile.profile_pic %}
+        <a href="{% url 'users:userprofilepage' post.author.userprofile.id %}"><img src="{{ post.author.userprofile.profile_pic.url }}" class="br-100 h3 w3 dib"></a>
+        {% else %}
+        <img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 h3 w3 dib"></a>
+        {% endif %}
+        <h1 class="f4 b">{{ post.author.first_name }} {{ post.author.last_name }}</h1>
+        <h3>{{ post.author }}</h3>
+        <br>
+
+        
+        <a href="{% url 'users:userprofilepage' post.author.userprofile.id %}">Profile</a>
+
+        {% if post.author.userprofile.website_url %}
+        | <a href="{{ post.author.userprofile.website_url }}">Website</a>
+        {% endif %}
+
+        {% if post.author.userprofile.facebook_url %}
+        | <a href="{{ post.author.userprofile.facebook_url }}">Meta</a>
+        {% endif %}
+
+        {% if post.author.userprofile.instagram_url %}
+        | <a href="{{ post.author.userprofile.instagram_url }}">Instagram</a>
+        {% endif %}
+
+        {% if post.author.userprofile.twitter_url %}
+        | <a href="{{ post.author.userprofile.twitter_url }}">Twitter</a>
+        {% endif %}
+
+        {% if post.author.userprofile.linkedin_url %}
+        | <a href="{{ post.author.userprofile.linkedin_url }}">LinkedIn</a>
+        {% endif %}
+
+        <hr class="mw6 bb bw1 b--black-10">
+    </div>
+    <p class="lh-copy measure center f6 black-70 mb2">{{ post.author.userprofile.bio }}</p>
+</article>
+
+<div class="col-md-8 card mb-4 mt-3 is-flex is-justify-content-center">
+    <div class="card-body">
+        <h2 class="tc b my-2"> {{ total_likes }} {% if total_likes == 1 %} like {% else %} likes {% endif %}</h2>
+        <form action="{% url 'blog:likepost' post.pk %}" method="post">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            {% if liked %}
+            <button class="button is-danger mb-3" type="submit" name="post_id" value="{{ post.id }}">
+                <span>Dislike</span>
+                <span class="icon is-small">
+                    <i class="fa-solid fa-thumbs-down"></i>
+                </span>
+            </button>
+            {% else %}
+            <button class="button is-primary mb-3" type="submit" name="post_id" value="{{ post.id }}">
+                <span>Like</span>
+                <span class="icon is-small">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                </span>
+            </button>
+            {% endif %}
+            {% endif %}
+        </form>
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+                {{ comment.name }}
+                <span class=" text-muted font-weight-normal">
+                    {{ comment.created_on }}
+                </span>
+            </p>
+            {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-md-8 card mb-4  mt-3 ">
+    <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+            Your comment is awaiting moderation
+        </div>
+        {% else %}
+        <h3 class="tc py-4 has-text-weight-bold">Leave a comment</h3>
+
+        <form method="post" style="padding-bottom: 40px; padding-right: 8rem;">
+            {% csrf_token %}
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">From</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input class="input" type="text" placeholder="Name">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left has-icons-right">
+                            <input class="input is-success" type="email" placeholder="Email">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Comment</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Write comment here"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <!-- Left empty for spacing -->
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary">
+                                <span>Send message</span>
+                                <span class="icon is-small">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

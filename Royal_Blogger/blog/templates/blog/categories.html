@@ -1,0 +1,45 @@
+{% extends 'blog/home.html' %}
+{% load static %}
+
+{% block content %}
+{% if category_posts %}
+<h1 style="font-family: baskerville, serif;" class="tc">Blog Posts About {{ cats }}</h1>
+<br>
+
+<section class="mw8 center avenir">
+    {% for post in category_posts %}
+    <article class="bt bb b--black-10">
+        <a class="db pv4 ph3 ph0-l no-underline black dim" href="{% url 'blog:detail' post.pk %}">
+            <div class="flex flex-column flex-row-ns">
+                <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" class="db">
+                    {% elif post.video %}
+                    <video src="{{ post.video.url }}" controls class="db"></video>
+                    {% else %}
+                    <img src="{% static 'blog/images/default-image.jpeg' %}" class="db">
+                    {% endif %}
+                </div>
+                <div class="w-100 w-60-ns pl3-ns">
+                    <h1 class="f3 fw1 baskerville mt0 lh-title">{{ post.title }}</h1>
+                    <p class="f6 f5-l lh-copy">
+                        {{ post.body|slice:":200" }}...
+                    </p>
+                    <br>
+                    <p class="f6 lh-copy mv0">By {{ post.author }}</p>
+                    <p class="f6 lh-copy mt1">{{ post.created_on }}</p>
+                    <p class="f6 lh-copy mt2">Category: {{ post.category }}</p>
+                </div>
+            </div>
+        </a>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+
+<p class="tc">
+Sorry, there aren't any blog posts about {{ cats }} yet...
+</p>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'blog/home.html' %}
+{% load static %}
+
+{% block content %}
+<article class="mw6 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
+    <div class="tc">
+        {% if page_user.profile_pic %}
+        <img src="{{ page_user.profile_pic.url }}" class="br-100 pa1 ba b--black-10 h3 w3 image is-128x128 center">
+        {% else %}
+        <img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 h3 w3 dib">
+        {% endif %}
+        <h1 class="f4 b">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h1>
+        <h3>{{ page_user }}</h3>
+        <br>
+
+        {% if page_user.website_url %}
+        <a href="{{ page_user.website_url }}">Website</a>
+        <!-- <img src="https://img.icons8.com/ios-filled/40/000000/portfolio.png" href="{{ page_user.website_url }}" style="cursor: pointer;"/> -->
+        {% endif %}
+
+        {% if page_user.facebook_url %}
+        | <a href="{{ page_user.facebook_url }}">Meta</a>
+        <!-- <img src="https://img.icons8.com/color/40/000000/facebook-new.png" href="{{ page_user.facebook_url }}" style="cursor: pointer;"/> -->
+        {% endif %}
+
+        {% if page_user.instagram_url %}
+        | <a href="{{ page_user.instagram_url }}">Instagram</a>
+        <!-- <img src="https://img.icons8.com/color/40/000000/instagram-new--v1.png" href="{{ page_user.instagram_url }}" style="cursor: pointer;"/> -->
+        {% endif %}
+
+        {% if page_user.twitter_url %}
+        | <a href="{{ page_user.twitter_url }}">Twitter</a>
+        <!-- <img src="https://img.icons8.com/fluency/40/000000/twitter.png" href="{{ page_user.twitter_url }}" style="cursor: pointer;"/> -->
+        {% endif %}
+
+        {% if page_user.linkedin_url %}
+        | <a href="{{ page_user.linkedin_url }}">LinkedIn</a>
+        <!-- <img src="https://img.icons8.com/external-justicon-flat-justicon/38/000000/external-linkedin-social-media-justicon-flat-justicon.png" href="{{ page_user.linkedin_url }}" style="cursor: pointer;"/> -->
+        {% endif %}
+
+        <hr class="mw6 bb bw1 b--black-10">
+    </div>
+    <p class="lh-copy measure center f6 black-70">{{ page_user.bio }}</p>
+</article>
+{% endblock %}
