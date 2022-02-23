@@ -3,7 +3,7 @@ from .forms import RegisterForm
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm

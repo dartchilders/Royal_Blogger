@@ -8,7 +8,7 @@
 {% if user.userprofile.profile_pic %}
 <a class="is-flex is-justify-content-center"><img src="{{ user.userprofile.profile_pic.url }}" class="br-100 pa1 ba b--black-10 h3 w3 image is-128x128"></a>
 {% else %}
-<img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 h3 w3 dib image is-128x128"></a>
+<a class="is-flex is-justify-content-center"><img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 pa1 ba b--black-10 h3 w3 image is-128x128"></a>
 {% endif %}
 <br>
 <div class="field is-flex is-justify-content-center">

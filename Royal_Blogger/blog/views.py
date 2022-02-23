@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import BlogCategories
 
 def Like(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -80,17 +81,17 @@ class DeletePost(DeleteView):
     #     return context
 
 # class AddCategory(CreateView):
-#     model = Category
+#     model = BlogCategories
 #     template_name = 'blog/addcategory.html'
 #     fields = '__all__'
 
 #     def get_context_data(self, *args, **kwargs):
-#         cat_menu = Category.objects.all()
+#         cat_menu = BlogCategories.objects.all()
 #         context = super(AddCategory, self).get_context_data(*args, **kwargs)
 #         context["cat_menu"] = cat_menu
 #         return context
 
-def Categories(request, cats):
-    category_posts = Post.objects.filter(category=cats)
-    return render(request, 'blog/categories.html', {'cats': cats, 'category_posts': category_posts})
+# def BlogCategory(request, cats):
+#     category_posts = Post.objects.filter(category=cats)
+#     return render(request, 'blog/categories.html', {'cats': cats, 'category_posts': category_posts})
     

@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-
 class Post(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
@@ -25,21 +24,6 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"pk": self.pk})
 
-
-# class Category(models.Model):
-#     name = models.CharField(max_length=255)
-
-#     def __str__(self):
-#         return self.name
-    
-#     def get_absolute_url(self):
-#         return reverse("blog:home")
-
-#     class Meta:
-#         verbose_name_plural = "Categories"
-#         ordering = ['name']
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     bio = models.TextField()
@@ -52,3 +36,16 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+# class BlogCategories(models.Model):
+#     name = models.CharField(max_length=255)
+
+#     def __str__(self):
+#         return self.name
+    
+#     def get_absolute_url(self):
+#         return reverse("blog:home")
+
+#     class Meta:
+#         verbose_name_plural = "Blog Categories"
+#         ordering = ['name']
