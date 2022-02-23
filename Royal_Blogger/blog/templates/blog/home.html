@@ -38,7 +38,7 @@
             {% if user.userprofile.profile_pic %}
             <img src="{{ user.userprofile.profile_pic.url }}" class="br-100 h3 w3 dib">
             {% else %}
-            <img src="{% static 'blog/images/default_profile_pic.jpeg' %}" class="br-100 h3 w3 dib">
+            <img src="{% static 'blog/images/default_profile_pic.jpg' %}" class="br-100 h3 w3 dib">
             {% endif %}
             <p class="f6 f5-l link bg-animate black-80 dib pa3 ph4-l b"><a href="{% url 'users:userprofilepage' user.userprofile.id %}" class="black">{{ user.username }}</a></p>
             {% endif %}
@@ -109,7 +109,7 @@
                         {% elif post.video %}
                         <video src="{{ post.video.url }}" controls class="db"></video>
                         {% else %}
-                        <img src="{% static 'blog/images/default-image.jpeg' %}" class="db">
+                        <img src="{% static 'blog/images/default-image.jpg' %}" class="db">
                         {% endif %}
                     </div>
                     <div class="w-100 w-60-ns pl3-ns">

@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import BlogCategories
+# from .models import BlogCategories
 
 def Like(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
