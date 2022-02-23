@@ -47,9 +47,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms',
     'ckeditor',
-    'cloudinary_storage',
     'cloudinary',
-    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
