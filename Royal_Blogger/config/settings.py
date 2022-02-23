@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms',
     'ckeditor',
+    'cloudinary_storage',
     'cloudinary',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -153,4 +155,4 @@ cloudinary.config(
   api_secret = "lyrsvT1Ku4bciqOePRPiO2-aSuY" 
 )
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

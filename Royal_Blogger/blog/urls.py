@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import Home, PostDetail, AddPost, EditPost, DeletePost, Like
+from django.conf.urls.static import static 
+from django.conf import settings
 # from .views import BlogCategory, AddCategory
 
 app_name = 'blog'
@@ -12,4 +14,5 @@ urlpatterns = [
     path('like/<int:pk>', Like, name='likepost')
     # path('addcategory/', AddCategory.as_view(), name='addcategory'),
     # path('category/<str:cats>', BlogCategory, name='category'),
-]
+    
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
