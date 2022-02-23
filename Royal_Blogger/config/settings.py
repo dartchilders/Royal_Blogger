@@ -152,3 +152,5 @@ cloudinary.config(
   api_key = "247161218744313", 
   api_secret = "lyrsvT1Ku4bciqOePRPiO2-aSuY" 
 )
+
+DEFAULT_FILE_STORAGE = 'cloudinary.config.storage.MediaCloudinaryStorage'
