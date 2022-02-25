@@ -1,6 +1,22 @@
-# Royal Blogger Blog Site
+# Royal Blogger (Blogging Website)
 
-# Project Overview
+##  Royal Blogger, a PDX Code Guild Full-Stack Capstone Project
+
+The Royal Blogger blogging website was designed as a final capstone project for PDX Code Guild's Full-Stack Software Development Bootcamp. It's a blogging website, where users can register for an account, login to their accounts, add blog posts with images and videos, edit and or delete their blog posts, like/dislike blog posts, comment on other's posts and view others' profiles. The application was created utilizing Django and HTML/CSS. 
+
+Check out Royal Blogger [HERE](https://royal-blogger.herokuapp.com)
+
+![Royal Blogger](https://github.com/dartchilders/Royal_Blogger/blob/main/Royal%20Blogger%20Screenshot.png)
+
+# Instructions to Run Royal Blogger Locally
+
+```
+$ pip install -r requirements.txt
+$ python manage.py migrate
+$ python manage.py runserver
+```
+
+# Royal Blogger Proposal
 
 **Royal Blogger** will be an blogging application (created with seperate Django and Vue projects) that will allow users to login, create blogs in typed, video and picture formats, edit, delete blog posts as well as logout of the application. Additionally, users will also be able to leave comments and likes on other users' blog posts. Royal Blogger will utilize a variety of frameworks and libraries, including Django, Python, HTML, the GraphQL API and CSS for style.
 
