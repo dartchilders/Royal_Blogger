@@ -102,3 +102,4 @@ Tag:
 - Adding the ability to search by categories (eg. Food, Travel, Coding etc...)
 - Adding "forgot password" button to the login screen
 - Stick footer to bottom of all pages (home.html)
+- Style registration and login forms better
