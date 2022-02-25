@@ -95,4 +95,10 @@ Tag:
 - Garden hose connected/working properly
 
 ## Can Haves
-- Functionality to upload videos and pictures 
+- Functionality to upload videos and pictures
+
+
+# What's Next?
+- Adding the ability to search by categories (eg. Food, Travel, Coding etc...)
+- Adding "forgot password" button to the login screen
+- Stick footer to bottom of all pages (home.html)
