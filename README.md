@@ -16,6 +16,7 @@ Check out Royal Blogger [HERE](https://royal-blogger.herokuapp.com)
 
 ```
 $ pip install -r requirements.txt
+$ cd Royal_Blogger
 $ python manage.py migrate
 $ python manage.py runserver
 ```
