@@ -6,7 +6,11 @@ The Royal Blogger blogging website was designed as a final capstone project for 
 
 Check out Royal Blogger [HERE](https://royal-blogger.herokuapp.com)
 
-![Royal Blogger](https://github.com/dartchilders/Royal_Blogger/blob/main/Royal%20Blogger%20Screenshot.png)
+![Royal Blogger](https://github.com/dartchilders/Royal_Blogger/blob/main/RB%20Main%20Page.png)
+
+![Royal Blogger](https://github.com/dartchilders/Royal_Blogger/blob/main/RB%20Blog%20Post%20Page.png)
+
+![Royal Blogger](https://github.com/dartchilders/Royal_Blogger/blob/main/RB%20Profile%20Page.png)
 
 # Instructions to Run Royal Blogger Locally
 
